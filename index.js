@@ -289,7 +289,7 @@ const destinations = [
 
   {
     key: "kharkhorin",
-    img: "/img/kharkhorin.jpg",
+    img: "img/kharkhorin.jpg",
     en: {
       name: "Kharkhorin",
       tag: "Culture",
