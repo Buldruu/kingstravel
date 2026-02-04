@@ -238,7 +238,7 @@ const PHOTOS = {
 const destinations = [
   {
     key: "gobi",
-    img: "/img/gobi.jpg",
+    img: "img/gobi.jpg",
     en: {
       name: "Gobi Desert",
       tag: "Nature",
@@ -255,7 +255,7 @@ const destinations = [
 
   {
     key: "khuvsgul",
-    img: "/img/khuvsgul.jpg",
+    img: "img/khuvsgul.jpg",
     en: {
       name: "Khuvsgul Lake",
       tag: "Nature",
@@ -272,7 +272,7 @@ const destinations = [
 
   {
     key: "terelj",
-    img: "/img/terelj.jpg",
+    img: "img/terelj.jpg",
     en: {
       name: "Terelj National Park",
       tag: "Family",
@@ -329,27 +329,27 @@ const provinces = [
   { en: "Zavkhan", ko: "자브항" },
 ];
 const PROVINCE_IMAGES = {
-  "Arkhangai": "/img/arkhangai.jpg",
-  "Bayan-Ulgii": "/img/bayan-ulgii.jpg",
-  "Bayankhongor": "/img/bayankhongor.jpg",
-  "Bulgan": "/img/bulgan.jpg",
-  "Darkhan-Uul": "/img/darkhan.jpg",
-  "Dornod": "/img/dornod.jpg",
-  "Dornogovi": "/img/dornogovi.jpg",
-  "Dundgovi": "/img/dundgovi.jpg",
-  "Govi-Altai": "/img/govi-altai.jpg",
-  "Govisumber": "/img/govisumber.jpg",
-  "Khentii": "/img/khentii.jpg",
-  "Khovd": "/img/khovd.jpg",
-  "Khuvsgul": "/img/khuvsgul.jpg",
-  "Umnugovi": "/img/umnugovi.jpg",
-  "Orkhon": "/img/orkhon.jpg",
-  "Uvurkhangai": "/img/uvurkhangai.jpg",
-  "Selenge": "/img/selenge.jpg",
-  "Sukhbaatar": "/img/sukhbaatar.jpg",
-  "Tuv": "/img/tuv.jpg",
-  "Uvs": "/img/uvs.jpg",
-  "Zavkhan": "/img/zavkhan.jpg",
+  "Arkhangai": "img/arkhangai.jpg",
+  "Bayan-Ulgii": "img/bayan-ulgii.jpg",
+  "Bayankhongor": "img/bayankhongor.jpg",
+  "Bulgan": "img/bulgan.jpg",
+  "Darkhan-Uul": "img/darkhan.jpg",
+  "Dornod": "img/dornod.jpg",
+  "Dornogovi": "img/dornogovi.jpg",
+  "Dundgovi": "img/dundgovi.jpg",
+  "Govi-Altai": "img/govi-altai.jpg",
+  "Govisumber": "img/govisumber.jpg",
+  "Khentii": "img/khentii.jpg",
+  "Khovd": "img/khovd.jpg",
+  "Khuvsgul": "img/khuvsgul.jpg",
+  "Umnugovi": "img/umnugovi.jpg",
+  "Orkhon": "img/orkhon.jpg",
+  "Uvurkhangai": "img/uvurkhangai.jpg",
+  "Selenge": "img/selenge.jpg",
+  "Sukhbaatar": "img/sukhbaatar.jpg",
+  "Tuv": "img/tuv.jpg",
+  "Uvs": "img/uvs.jpg",
+  "Zavkhan": "img/zavkhan.jpg",
 };
 
 // ================== Packages / Reviews ==================
