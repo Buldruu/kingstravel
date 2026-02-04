@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NomadicKings — Travel Mongolia</title>
+  <meta name="description" content="NomadicKings: Mongolia domestic tours, drivers, guides, camps, custom itineraries." />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="pill" data-i18n="top.pill">Mongolia Tours • Support</span>
+        <span class="muted">+976 0000 0000</span>
+      </div>
+
+      <div class="topbar-right">
+        <div class="lang">
+          <button class="lang-btn is-active" data-lang="en" aria-label="English">EN</button>
+          <button class="lang-btn" data-lang="ko" aria-label="Korean">KO</button>
+        </div>
+        <a class="topbar-link" href="#contact" data-i18n="top.quote">Get a quote</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="home">
+    <div class="container header-inner">
+      <a class="logo" href="#home" aria-label="NomadicKings Home">
+        <span class="logo-mark">N</span>
+        <span class="logo-text">Nomadic<span class="logo-accent">Kings</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-list" id="navList">
+          <li><a class="nav-link" href="#destinations" data-i18n="nav.dest">Destinations</a></li>
+          <li><a class="nav-link" href="#provinces" data-i18n="nav.prov">21 Provinces</a></li>
+          <li><a class="nav-link" href="#packages" data-i18n="nav.pack">Packages</a></li>
+          <li><a class="nav-link" href="#services" data-i18n="nav.serv">Services</a></li>
+          <li><a class="nav-link" href="#reviews" data-i18n="nav.rev">Reviews</a></li>
+          <li><a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a></li>
+          <li><a class="btn btn-small" href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero (photo background via CSS var) -->
+  <section class="hero hero-photo" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 data-i18n="hero.h1">Explore Mongolia with confidence.</h1>
+        <p class="lead" data-i18n="hero.lead">
+          Gobi, Khuvsgul, Altai, Terelj, Kharkhorin — private tours, drivers, guides, camps, and custom routes.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#packages" data-i18n="hero.cta1">Explore packages</a>
+          <a class="btn btn-ghost" href="#services" data-i18n="hero.cta2">See services</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">100+</div>
+            <div class="stat-label" data-i18n="hero.stat1">Routes</div>
+          </div>
+          <!-- <div class="stat">
+            <div class="stat-num">4.9/5</div>
+            <div class="stat-label" data-i18n="hero.stat2">Client rating</div>
+          </div> -->
+          <div class="stat">
+            <div class="stat-num">24–48h</div>
+            <div class="stat-label" data-i18n="hero.stat3">Reply time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Trip search">
+        <h2 class="card-title" data-i18n="search.title">Quick tour search</h2>
+        <p class="muted small" data-i18n="search.sub">We’ll propose 2–3 options based on your needs.</p>
+
+        <form id="searchForm" class="form">
+          <label class="field">
+            <span data-i18n="search.destLabel">Destination</span>
+            <input id="qDestination" type="text" placeholder="Gobi, Khuvsgul, Altai..." autocomplete="off" />
+          </label>
+
+          <div class="form-row">
+            <label class="field">
+              <span data-i18n="search.dateLabel">Start date</span>
+              <input id="qDate" type="date" />
+            </label>
+
+            <label class="field">
+              <span data-i18n="search.styleLabel">Style</span>
+              <select id="qStyle">
+                <option value="any" data-i18n="search.styleAny">Any</option>
+                <option value="budget" data-i18n="search.styleBudget">Budget</option>
+                <option value="mid" data-i18n="search.styleMid">Mid-range</option>
+                <option value="lux" data-i18n="search.styleLux">Premium</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="btn btn-full" type="submit" data-i18n="search.btn">Get options</button>
+          <p class="muted tiny" data-i18n="search.tip">Tip: try “Gobi” + “Mid-range”.</p>
+        </form>
+
+        <div id="searchResult" class="search-result" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="hero-wave" aria-hidden="true"></div>
+  </section>
+
+  <!-- Destinations (photo background via CSS var) -->
+  <section class="section section-photo" id="destinations">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="dest.h2">Top destinations</h2>
+          <p class="muted" data-i18n="dest.p">Most requested routes across Mongolia.</p>
+        </div>
+        <a class="link" href="#packages" data-i18n="dest.link">View packages →</a>
+      </div>
+
+      <div class="grid cards-4" id="destGrid"></div>
+    </div>
+  </section>
+
+  <!-- 21 Provinces (Aimags) -->
+  <section class="section section-alt section-photo" id="provinces">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="prov.h2">21 Provinces (Aimags)</h2>
+          <p class="muted" data-i18n="prov.p">Browse all provinces — great for planning custom routes.</p>
+        </div>
+
+        <div class="prov-tools">
+          <input id="provSearch" class="prov-search" type="search" placeholder="Search province..." />
+        </div>
+      </div>
+
+      <div class="grid cards-4" id="provGrid"></div>
+
+      <p class="muted tiny" data-i18n="prov.note">
+        Note: Ulaanbaatar is a separate municipality (not an aimag).
+      </p>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section class="section section-alt" id="packages">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="pkg.h2">Tour packages</h2>
+          <p class="muted" data-i18n="pkg.p">Filter by type and pick what fits your time and comfort.</p>
+        </div>
+
+        <div class="filters">
+          <button class="chip is-active" data-filter="all" data-i18n="filter.all">All</button>
+          <button class="chip" data-filter="nature" data-i18n="filter.nature">Nature</button>
+          <button class="chip" data-filter="culture" data-i18n="filter.culture">Culture</button>
+          <button class="chip" data-filter="adventure" data-i18n="filter.adventure">Adventure</button>
+          <button class="chip" data-filter="family" data-i18n="filter.family">Family</button>
+        </div>
+      </div>
+
+      <div class="grid cards-3" id="pkgGrid"></div>
+      <p class="muted tiny" data-i18n="pkg.note">Prices are demo placeholders. Replace with your real pricing (USD / MNT).</p>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="serv.h2">What we provide</h2>
+          <p class="muted" data-i18n="serv.p">Everything for a smooth Mongolia journey — in one place.</p>
+        </div>
+      </div>
+
+      <div class="grid cards-4">
+        <div class="card icon-card">
+          <div class="icon">🚙</div>
+          <h3 data-i18n="serv.s1t">4x4 & driver</h3>
+          <p class="muted" data-i18n="serv.s1p">Safe vehicles, experienced drivers, long-distance routes.</p>
+        </div>
+        <div class="card icon-card">
+          <div class="icon">🧭</div>
+          <h3 data-i18n="serv.s2t">Guides</h3>
+          <p class="muted" data-i18n="serv.s2p">English/Korean speaking guide options available.</p>
+        </div>
+        <div class="card icon-card">
+          <div class="icon">⛺</div>
+          <h3 data-i18n="serv.s3t">Camps & stays</h3>
+          <p class="muted" data-i18n="serv.s3p">Ger camps, hotels, and curated stops.</p>
+        </div>
+        <div class="card icon-card">
+          <div class="icon">🗺️</div>
+          <h3 data-i18n="serv.s4t">Custom itinerary</h3>
+          <p class="muted" data-i18n="serv.s4p">We build routes by season, time, and interests.</p>
+        </div>
+      </div>
+
+      <div class="cta">
+        <div>
+          <h3 data-i18n="cta.h3">Want a custom plan?</h3>
+          <p class="muted" data-i18n="cta.p">Share dates, budget, and interests — we’ll propose options.</p>
+        </div>
+        <a class="btn" href="#contact" data-i18n="cta.btn">Request a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section section-alt" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="rev.h2">Client reviews</h2>
+          <p class="muted" data-i18n="rev.p">Feedback from travelers we helped in Mongolia.</p>
+        </div>
+        <div class="slider-actions">
+          <button class="btn btn-ghost btn-small" id="prevReview" aria-label="Previous">←</button>
+          <button class="btn btn-ghost btn-small" id="nextReview" aria-label="Next">→</button>
+        </div>
+      </div>
+
+      <div class="review" id="reviewBox" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="faq.h2">FAQ</h2>
+          <p class="muted" data-i18n="faq.p">Quick answers before you book.</p>
+        </div>
+      </div>
+
+      <div class="accordion" id="faqAcc">
+        <div class="acc-item">
+          <button class="acc-q" aria-expanded="false">
+            <span data-i18n="faq.q1">Best season to travel Mongolia?</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-a"><p data-i18n="faq.a1">June–September is most popular. Shoulder seasons can be great depending on route and weather.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-q" aria-expanded="false">
+            <span data-i18n="faq.q2">Private tour or group tour?</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-a"><p data-i18n="faq.a2">Private tours give you flexibility. Group tours are more budget-friendly. We can offer both.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-q" aria-expanded="false">
+            <span data-i18n="faq.q3">Do you provide English/Korean guides?</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-a"><p data-i18n="faq.a3">Yes. Availability depends on dates — book early for peak season.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-q" aria-expanded="false">
+            <span data-i18n="faq.q4">What’s included in packages?</span>
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-a"><p data-i18n="faq.a4">Typically: vehicle + driver, fuel, accommodation, and itinerary support. Meals and guide may vary by package.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section section-alt" id="contact">
+    <div class="container contact-grid">
+      <div>
+        <h2 data-i18n="contact.h2">Contact</h2>
+        <p class="muted" data-i18n="contact.p">Tell us your dates, destinations, number of travelers, and comfort level. We’ll reply with options.</p>
+
+        <div class="contact-cards">
+          <div class="card">
+            <h3 data-i18n="contact.officeT">Office</h3>
+            <p class="muted" data-i18n="contact.officeP">Ulaanbaatar, Mongolia</p>
+          </div>
+          <div class="card">
+            <h3 data-i18n="contact.phoneT">Phone</h3>
+            <p class="muted">+976 0000 0000</p>
+          </div>
+          <div class="card">
+            <h3 data-i18n="contact.emailT">Email</h3>
+            <p class="muted">hello@nomadickings.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card contact-form">
+        <h3 data-i18n="contact.formT">Request a quote</h3>
+        <form id="contactForm" class="form">
+          <label class="field">
+            <span data-i18n="contact.name">Name</span>
+            <input id="cName" type="text" placeholder="Your name" required />
+          </label>
+          <label class="field">
+            <span data-i18n="contact.email">Email</span>
+            <input id="cEmail" type="email" placeholder="you@email.com" required />
+          </label>
+          <label class="field">
+            <span data-i18n="contact.msg">Message</span>
+            <textarea id="cMsg" rows="5" placeholder="Dates, destinations, travelers, budget..." required></textarea>
+          </label>
+
+          <button class="btn btn-full" type="submit" data-i18n="contact.send">Send</button>
+          <p class="muted tiny" id="contactHint"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo footer-logo">
+          <span class="logo-mark">N</span>
+          <span class="logo-text">Nomadic<span class="logo-accent">Kings</span></span>
+        </div>
+        <p class="muted small" data-i18n="footer.tagline">Mongolia Tours • Drivers • Guides • Camps • Custom Routes</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#destinations" data-i18n="nav.dest">Destinations</a>
+        <a href="#provinces" data-i18n="nav.prov">21 Provinces</a>
+        <a href="#packages" data-i18n="nav.pack">Packages</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+
+      <p class="muted tiny">© <span id="year"></span> NomadicKings</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+  <script src="index.js"></script>
+</body>
+</html>
