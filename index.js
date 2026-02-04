@@ -238,7 +238,7 @@ const PHOTOS = {
 const destinations = [
   {
     key: "gobi",
-    img: PHOTOS.gobi,
+    img: "/img/gobi.jpg",
     en: {
       name: "Gobi Desert",
       tag: "Nature",
@@ -255,7 +255,7 @@ const destinations = [
 
   {
     key: "khuvsgul",
-    img: PHOTOS.khuvsgul,
+    img: "/img/khuvsgul.jpg",
     en: {
       name: "Khuvsgul Lake",
       tag: "Nature",
@@ -272,7 +272,7 @@ const destinations = [
 
   {
     key: "terelj",
-    img: PHOTOS.tuul,
+    img: "/img/terelj.jpg",
     en: {
       name: "Terelj National Park",
       tag: "Family",
@@ -283,13 +283,13 @@ const destinations = [
       name: "테렐지 국립공원",
       tag: "가족",
       highlight: "가벼운 일정 • 울란바토르 근교",
-        days: "1–3일",
+      days: "1–3일",
     },
   },
 
   {
     key: "kharkhorin",
-    img: PHOTOS.banner,
+    img: "/img/kharkhorin.jpg",
     en: {
       name: "Kharkhorin",
       tag: "Culture",
@@ -303,80 +303,11 @@ const destinations = [
       days: "2–4일",
     },
   },
-
-  {
-    key: "altai",
-    img: PHOTOS.tuul,
-    en: {
-      name: "Altai Mountains",
-      tag: "Adventure",
-      highlight: "Trekking • Eagle culture",
-      days: "7–12 days",
-    },
-    ko: {
-      name: "알타이 산맥",
-      tag: "어드벤처",
-      highlight: "트레킹 • 독수리 문화",
-      days: "7–12일",
-    },
-  },
-
-  {
-    key: "orkhon",
-    img: PHOTOS.tuul,
-    en: {
-      name: "Orkhon Valley",
-      tag: "Culture",
-      highlight: "Waterfall • Nomad life",
-      days: "3–6 days",
-    },
-    ko: {
-      name: "오르혼 계곡",
-      tag: "문화",
-      highlight: "폭포 • 유목 생활",
-      days: "3–6일",
-    },
-  },
-
-  {
-    key: "bayanolgii",
-    img: PHOTOS.tuul,
-    en: {
-      name: "Bayan-Olgii",
-      tag: "Adventure",
-      highlight: "Eagle hunters • Altai",
-      days: "7–10 days",
-    },
-    ko: {
-      name: "바양-올기",
-      tag: "어드벤처",
-      highlight: "독수리 사냥꾼 • 알타이",
-      days: "7–10일",
-    },
-  },
-
-  {
-    key: "whiteLake",
-    img: PHOTOS.khuvsgul,
-    en: {
-      name: "Terkhiin Tsagaan Lake",
-      tag: "Nature",
-      highlight: "Volcano • Lake",
-      days: "3–6 days",
-    },
-    ko: {
-      name: "테르힌 차간 호수",
-      tag: "자연",
-      highlight: "화산 • 호수",
-      days: "3–6일",
-    },
-  },
 ];
-
 // ================== 21 Provinces (Aimags) ==================
 const provinces = [
   { en: "Arkhangai", ko: "아르항가이" },
-  { en: "Bayan-Olgii", ko: "바양-올기" },
+  { en: "Bayan-Ulgii", ko: "바양-올기" },
   { en: "Bayankhongor", ko: "바양홍고르" },
   { en: "Bulgan", ko: "불간" },
   { en: "Darkhan-Uul", ko: "다르항-울" },
@@ -397,6 +328,29 @@ const provinces = [
   { en: "Uvs", ko: "우브스" },
   { en: "Zavkhan", ko: "자브항" },
 ];
+const PROVINCE_IMAGES = {
+  "Arkhangai": "/img/arkhangai.jpg",
+  "Bayan-Ulgii": "/img/bayan-ulgii.jpg",
+  "Bayankhongor": "/img/bayankhongor.jpg",
+  "Bulgan": "/img/bulgan.jpg",
+  "Darkhan-Uul": "/img/darkhan.jpg",
+  "Dornod": "/img/dornod.jpg",
+  "Dornogovi": "/img/dornogovi.jpg",
+  "Dundgovi": "/img/dundgovi.jpg",
+  "Govi-Altai": "/img/govi-altai.jpg",
+  "Govisumber": "/img/govisumber.jpg",
+  "Khentii": "/img/khentii.jpg",
+  "Khovd": "/img/khovd.jpg",
+  "Khuvsgul": "/img/khuvsgul.jpg",
+  "Umnugovi": "/img/umnugovi.jpg",
+  "Orkhon": "/img/orkhon.jpg",
+  "Uvurkhangai": "/img/uvurkhangai.jpg",
+  "Selenge": "/img/selenge.jpg",
+  "Sukhbaatar": "/img/sukhbaatar.jpg",
+  "Tuv": "/img/tuv.jpg",
+  "Uvs": "/img/uvs.jpg",
+  "Zavkhan": "/img/zavkhan.jpg",
+};
 
 // ================== Packages / Reviews ==================
 const packages = [
@@ -632,6 +586,7 @@ function renderDestinations() {
 // ================== Render 21 Provinces ==================
 function renderProvinces() {
   const q = ($("#provSearch").value || "").trim().toLowerCase();
+
   const list = provinces.filter((p) => {
     const name = (currentLang === "ko" ? p.ko : p.en).toLowerCase();
     const en = p.en.toLowerCase();
@@ -640,22 +595,27 @@ function renderProvinces() {
 
   const grid = $("#provGrid");
   grid.innerHTML = list
-    .map(
-      (p) => `
-    <article class="card">
-      <div class="card-media" style="background-image:url('${PHOTOS.dest}')">
-        <span class="card-badge">${currentLang === "ko" ? "아이막" : "Aimag"}</span>
-      </div>
-      <h3>${currentLang === "ko" ? p.ko : p.en}</h3>
-      <div class="meta">
-        <span class="muted">${p.en}</span>
-        <span class="muted">—</span>
-      </div>
-    </article>
-  `,
-    )
+    .map((p) => {
+      const img = PROVINCE_IMAGES[p.en] || "/img/default.jpg"; // fallback зураг
+      const badge = currentLang === "ko" ? "아이막" : "Aimag";
+      const title = currentLang === "ko" ? p.ko : p.en;
+
+      return `
+      <article class="card">
+        <div class="card-media" style="background-image:url('${img}')">
+          <span class="card-badge">${badge}</span>
+        </div>
+        <h3>${title}</h3>
+        <div class="meta">
+          <span class="muted">${p.en}</span>
+          <span class="muted">—</span>
+        </div>
+      </article>
+    `;
+    })
     .join("");
 }
+
 
 // ================== Render Packages ==================
 let currentFilter = "all";
