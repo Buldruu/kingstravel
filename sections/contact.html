@@ -1,0 +1,51 @@
+<section class="section" id="contact">
+  <div class="container contact-grid">
+    <div class="reveal">
+      <div class="section-label" data-i18n="contact.label">Get In Touch</div>
+      <h2 data-i18n="contact.h2">Contact</h2>
+      <p class="muted" data-i18n="contact.p">Tell us your dates, destinations, number of travelers, and comfort level. We'll reply with options.</p>
+      <div class="contact-cards">
+        <div class="card contact-info-card">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h3 data-i18n="contact.officeT">Office</h3>
+            <p class="muted" data-i18n="contact.officeP">Ulaanbaatar, Mongolia</p>
+          </div>
+        </div>
+        <div class="card contact-info-card">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h3 data-i18n="contact.phoneT">Phone</h3>
+            <p class="muted">+976 0000 0000</p>
+          </div>
+        </div>
+        <div class="card contact-info-card">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h3 data-i18n="contact.emailT">Email</h3>
+            <p class="muted">hello@nomadickings.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card contact-form reveal">
+      <h3 data-i18n="contact.formT">Request a quote</h3>
+      <form id="contactForm" class="form">
+        <label class="field">
+          <span data-i18n="contact.name">Name</span>
+          <input id="cName" type="text" placeholder="Your name" required />
+        </label>
+        <label class="field">
+          <span data-i18n="contact.email">Email</span>
+          <input id="cEmail" type="email" placeholder="you@email.com" required />
+        </label>
+        <label class="field">
+          <span data-i18n="contact.msg">Message</span>
+          <textarea id="cMsg" rows="5" placeholder="Dates, destinations, travelers, budget..." required></textarea>
+        </label>
+        <button class="btn btn-full" type="submit" data-i18n="contact.send">Send</button>
+        <p class="muted tiny" id="contactHint"></p>
+      </form>
+    </div>
+  </div>
+</section>

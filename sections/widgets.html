@@ -1,0 +1,36 @@
+<button class="to-top" id="toTop" aria-label="Back to top" type="button">↑</button>
+
+<div class="quick-search-wrapper">
+  <button class="fab-search" id="openSearch" aria-label="Open quick search" type="button">🔍</button>
+  <aside class="hero-card" id="mobileSearchBox" aria-label="Trip search">
+    <button class="search-close" id="closeSearch" type="button">✕</button>
+    <h2 class="card-title" data-i18n="search.title">Quick tour search</h2>
+    <p class="muted small" data-i18n="search.sub">We'll propose 2–3 options based on your needs.</p>
+    <form id="searchForm" class="form">
+      <label class="field">
+        <span data-i18n="search.destLabel">Destination</span>
+        <input id="qDestination" type="text" placeholder="Gobi, Khuvsgul, Altai..." autocomplete="off" />
+      </label>
+      <div class="form-row">
+        <label class="field">
+          <span data-i18n="search.dateLabel">Start date</span>
+          <input id="qDate" type="date" />
+        </label>
+        <label class="field">
+          <span data-i18n="search.styleLabel">Style</span>
+          <select id="qStyle">
+            <option value="any" data-i18n="search.styleAny">Any</option>
+            <option value="budget" data-i18n="search.styleBudget">Budget</option>
+            <option value="mid" data-i18n="search.styleMid">Mid-range</option>
+            <option value="lux" data-i18n="search.styleLux">Premium</option>
+          </select>
+        </label>
+      </div>
+      <button class="btn btn-full" type="submit" data-i18n="search.btn">Get options</button>
+      <p class="muted tiny" data-i18n="search.tip">Tip: try "Gobi" + "Mid-range".</p>
+    </form>
+    <div id="searchResult" class="search-result" aria-live="polite"></div>
+  </aside>
+</div>
+
+<div class="mobile-dim is-hidden" id="mobileDim" aria-hidden="true"></div>
