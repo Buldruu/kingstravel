@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NomadicKings — Travel Mongolia</title>
-  <meta name="description" content="NomadicKings: Mongolia domestic tours, drivers, guides, camps, custom itineraries." />
+  <meta name="description" content="NomadicKings: Mongolia tours, drivers, guides, camps, custom itineraries." />
   <link rel="stylesheet" href="index.css" />
 </head>
+
 <body>
   <!-- Topbar -->
   <div class="topbar">
@@ -16,10 +17,10 @@
         <span class="muted">+976 0000 0000</span>
       </div>
 
-      <div class="topbar-right">
+      <div class="topbar-right" style="display:flex; align-items:center;">
         <div class="lang">
-          <button class="lang-btn is-active" data-lang="en" aria-label="English">EN</button>
-          <button class="lang-btn" data-lang="ko" aria-label="Korean">KO</button>
+          <button class="lang-btn is-active" data-lang="en" aria-label="English" type="button">EN</button>
+          <button class="lang-btn" data-lang="ko" aria-label="Korean" type="button">KO</button>
         </div>
         <a class="topbar-link" href="#contact" data-i18n="top.quote">Get a quote</a>
       </div>
@@ -35,7 +36,7 @@
       </a>
 
       <nav class="nav" aria-label="Primary">
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" type="button">
           <span></span><span></span><span></span>
         </button>
 
@@ -52,11 +53,11 @@
     </div>
   </header>
 
-  <!-- Hero (photo background via CSS var) -->
+  <!-- Hero -->
   <section class="hero hero-photo" id="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <h1 data-i18n="hero.h1">Explore Mongolia with confidence.</h1>
+        <h1 data-i18n="hero.h1">Your Trusted Way to Explore Mongolia.</h1>
         <p class="lead" data-i18n="hero.lead">
           Gobi, Khuvsgul, Altai, Terelj, Kharkhorin — private tours, drivers, guides, camps, and custom routes.
         </p>
@@ -71,56 +72,25 @@
             <div class="stat-num">100+</div>
             <div class="stat-label" data-i18n="hero.stat1">Routes</div>
           </div>
-          <!-- <div class="stat">
-            <div class="stat-num">4.9/5</div>
-            <div class="stat-label" data-i18n="hero.stat2">Client rating</div>
-          </div> -->
           <div class="stat">
             <div class="stat-num">24–48h</div>
             <div class="stat-label" data-i18n="hero.stat3">Reply time</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="hero-card" aria-label="Trip search">
-        <h2 class="card-title" data-i18n="search.title">Quick tour search</h2>
-        <p class="muted small" data-i18n="search.sub">We’ll propose 2–3 options based on your needs.</p>
-
-        <form id="searchForm" class="form">
-          <label class="field">
-            <span data-i18n="search.destLabel">Destination</span>
-            <input id="qDestination" type="text" placeholder="Gobi, Khuvsgul, Altai..." autocomplete="off" />
-          </label>
-
-          <div class="form-row">
-            <label class="field">
-              <span data-i18n="search.dateLabel">Start date</span>
-              <input id="qDate" type="date" />
-            </label>
-
-            <label class="field">
-              <span data-i18n="search.styleLabel">Style</span>
-              <select id="qStyle">
-                <option value="any" data-i18n="search.styleAny">Any</option>
-                <option value="budget" data-i18n="search.styleBudget">Budget</option>
-                <option value="mid" data-i18n="search.styleMid">Mid-range</option>
-                <option value="lux" data-i18n="search.styleLux">Premium</option>
-              </select>
-            </label>
-          </div>
-
-          <button class="btn btn-full" type="submit" data-i18n="search.btn">Get options</button>
-          <p class="muted tiny" data-i18n="search.tip">Tip: try “Gobi” + “Mid-range”.</p>
-        </form>
-
-        <div id="searchResult" class="search-result" aria-live="polite"></div>
-      </div>
+    <!-- Hero Slider Controls -->
+    <div class="hero-slider" aria-label="Hero image slider">
+      <button class="hs-btn" id="hsPrev" aria-label="Previous image" type="button">‹</button>
+      <div class="hs-dots" id="hsDots" aria-label="Slide dots"></div>
+      <button class="hs-btn" id="hsNext" aria-label="Next image" type="button">›</button>
     </div>
 
     <div class="hero-wave" aria-hidden="true"></div>
   </section>
 
-  <!-- Destinations (photo background via CSS var) -->
+  <!-- Destinations -->
   <section class="section section-photo" id="destinations">
     <div class="container">
       <div class="section-head">
@@ -135,7 +105,7 @@
     </div>
   </section>
 
-  <!-- 21 Provinces (Aimags) -->
+  <!-- 21 Provinces -->
   <section class="section section-alt section-photo" id="provinces">
     <div class="container">
       <div class="section-head">
@@ -167,11 +137,11 @@
         </div>
 
         <div class="filters">
-          <button class="chip is-active" data-filter="all" data-i18n="filter.all">All</button>
-          <button class="chip" data-filter="nature" data-i18n="filter.nature">Nature</button>
-          <button class="chip" data-filter="culture" data-i18n="filter.culture">Culture</button>
-          <button class="chip" data-filter="adventure" data-i18n="filter.adventure">Adventure</button>
-          <button class="chip" data-filter="family" data-i18n="filter.family">Family</button>
+          <button class="chip is-active" data-filter="all" data-i18n="filter.all" type="button">All</button>
+          <button class="chip" data-filter="nature" data-i18n="filter.nature" type="button">Nature</button>
+          <button class="chip" data-filter="culture" data-i18n="filter.culture" type="button">Culture</button>
+          <button class="chip" data-filter="adventure" data-i18n="filter.adventure" type="button">Adventure</button>
+          <button class="chip" data-filter="family" data-i18n="filter.family" type="button">Family</button>
         </div>
       </div>
 
@@ -232,8 +202,8 @@
           <p class="muted" data-i18n="rev.p">Feedback from travelers we helped in Mongolia.</p>
         </div>
         <div class="slider-actions">
-          <button class="btn btn-ghost btn-small" id="prevReview" aria-label="Previous">←</button>
-          <button class="btn btn-ghost btn-small" id="nextReview" aria-label="Next">→</button>
+          <button class="btn btn-ghost btn-small" id="prevReview" aria-label="Previous" type="button">←</button>
+          <button class="btn btn-ghost btn-small" id="nextReview" aria-label="Next" type="button">→</button>
         </div>
       </div>
 
@@ -253,7 +223,7 @@
 
       <div class="accordion" id="faqAcc">
         <div class="acc-item">
-          <button class="acc-q" aria-expanded="false">
+          <button class="acc-q" aria-expanded="false" type="button">
             <span data-i18n="faq.q1">Best season to travel Mongolia?</span>
             <span class="acc-icon">+</span>
           </button>
@@ -261,7 +231,7 @@
         </div>
 
         <div class="acc-item">
-          <button class="acc-q" aria-expanded="false">
+          <button class="acc-q" aria-expanded="false" type="button">
             <span data-i18n="faq.q2">Private tour or group tour?</span>
             <span class="acc-icon">+</span>
           </button>
@@ -269,7 +239,7 @@
         </div>
 
         <div class="acc-item">
-          <button class="acc-q" aria-expanded="false">
+          <button class="acc-q" aria-expanded="false" type="button">
             <span data-i18n="faq.q3">Do you provide English/Korean guides?</span>
             <span class="acc-icon">+</span>
           </button>
@@ -277,7 +247,7 @@
         </div>
 
         <div class="acc-item">
-          <button class="acc-q" aria-expanded="false">
+          <button class="acc-q" aria-expanded="false" type="button">
             <span data-i18n="faq.q4">What’s included in packages?</span>
             <span class="acc-icon">+</span>
           </button>
@@ -292,7 +262,9 @@
     <div class="container contact-grid">
       <div>
         <h2 data-i18n="contact.h2">Contact</h2>
-        <p class="muted" data-i18n="contact.p">Tell us your dates, destinations, number of travelers, and comfort level. We’ll reply with options.</p>
+        <p class="muted" data-i18n="contact.p">
+          Tell us your dates, destinations, number of travelers, and comfort level. We’ll reply with options.
+        </p>
 
         <div class="contact-cards">
           <div class="card">
@@ -355,7 +327,52 @@
     </div>
   </footer>
 
-  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+  <button class="to-top" id="toTop" aria-label="Back to top" type="button">↑</button>
+
+  <!-- Floating Quick Search -->
+  <div class="quick-search-wrapper" aria-label="Quick search floating">
+    <button class="fab-search" id="openSearch" aria-label="Open quick search" type="button">🔍</button>
+
+    <aside class="hero-card" id="mobileSearchBox" aria-label="Trip search">
+      <button class="search-close" id="closeSearch" aria-label="Close" type="button">✕</button>
+
+      <h2 class="card-title" data-i18n="search.title">Quick tour search</h2>
+      <p class="muted small" data-i18n="search.sub">We’ll propose 2–3 options based on your needs.</p>
+
+      <form id="searchForm" class="form">
+        <label class="field">
+          <span data-i18n="search.destLabel">Destination</span>
+          <input id="qDestination" type="text" placeholder="Gobi, Khuvsgul, Altai..." autocomplete="off" />
+        </label>
+
+        <div class="form-row">
+          <label class="field">
+            <span data-i18n="search.dateLabel">Start date</span>
+            <input id="qDate" type="date" />
+          </label>
+
+          <label class="field">
+            <span data-i18n="search.styleLabel">Style</span>
+            <select id="qStyle">
+              <option value="any" data-i18n="search.styleAny">Any</option>
+              <option value="budget" data-i18n="search.styleBudget">Budget</option>
+              <option value="mid" data-i18n="search.styleMid">Mid-range</option>
+              <option value="lux" data-i18n="search.styleLux">Premium</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="btn btn-full" type="submit" data-i18n="search.btn">Get options</button>
+        <p class="muted tiny" data-i18n="search.tip">Tip: try “Gobi” + “Mid-range”.</p>
+      </form>
+
+      <div id="searchResult" class="search-result" aria-live="polite"></div>
+    </aside>
+  </div>
+
+  <!-- Dim overlay -->
+  <div class="mobile-dim is-hidden" id="mobileDim" aria-hidden="true"></div>
+
   <script src="index.js"></script>
 </body>
 </html>

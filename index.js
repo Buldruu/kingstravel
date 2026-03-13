@@ -1,4 +1,3 @@
-// ================== i18n ==================
 const I18N = {
   en: {
     "top.pill": "Mongolia Tours • Support",
@@ -11,13 +10,12 @@ const I18N = {
     "nav.faq": "FAQ",
     "nav.contact": "Contact",
 
-    "hero.h1": "Explore Mongolia with confidence.",
+    "hero.h1": "Your Trusted Way to Explore Mongolia.",
     "hero.lead":
-      "Gobi, Khuvsgul, Altai, Terelj, Kharkhorin — private tours, drivers, guidesf, camps, and custom routes.",
+      "Gobi, Khuvsgul, Altai, Terelj, Kharkhorin — private tours, drivers, guides, camps, and custom routes.",
     "hero.cta1": "Explore packages",
     "hero.cta2": "See services",
     "hero.stat1": "Routes",
-    "hero.stat2": "Client rating",
     "hero.stat3": "Reply time",
 
     "search.title": "Quick tour search",
@@ -122,13 +120,12 @@ const I18N = {
     "nav.faq": "FAQ",
     "nav.contact": "문의",
 
-    "hero.h1": "안심하고 몽골을 여행하세요.",
+    "hero.h1": "믿고 떠나는 몽골 여행",
     "hero.lead":
       "고비, 홉스골, 알타이, 테렐지, 하르호린 — 프라이빗 투어, 차량/기사, 가이드, 캠프, 맞춤 일정.",
     "hero.cta1": "패키지 보기",
     "hero.cta2": "서비스 보기",
     "hero.stat1": "루트",
-    "hero.stat2": "고객 평점",
     "hero.stat3": "응답 시간",
 
     "search.title": "빠른 투어 검색",
@@ -221,20 +218,74 @@ const I18N = {
 
 let currentLang = localStorage.getItem("lang") || "en";
 
-// ================== Photo URLs ==================
+// ================== Helpers ==================
+const $ = (sel, parent = document) => parent.querySelector(sel);
+const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
+
+function t(key) {
+  return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
+}
+function stars(n) {
+  return "★".repeat(n) + "☆".repeat(Math.max(0, 5 - n));
+}
+function money(n) {
+  return `$${n}`;
+}
+
+// ================== Section bg photos ==================
 const PHOTOS = {
-  hero: "https://www.toursmongolia.com/uploads/Amazing_landscape_Tuul_river_bayar.jpg",
   dest: "https://www.toursmongolia.com/uploads/Amazing_landscape_khovsgol_lake_bayar.jpg",
   prov: "https://www.toursmongolia.com/uploads/Amazing_landscape_Gobi_desert_bayar.jpg",
-  gobi: "https://www.toursmongolia.com/uploads/Amazing_landscape_Gobi_desert_bayar.jpg",
-  khuvsgul:
-    "https://www.toursmongolia.com/uploads/Amazing_landscape_khovsgol_lake_bayar.jpg",
-  tuul: "https://www.toursmongolia.com/uploads/Amazing_landscape_Tuul_river_bayar.jpg",
-  banner:
-    "https://www.toursmongolia.com/uploads/Mongolia_travel_blog_news_ayantravel_cover.jpg",
 };
 
-// ================== Data (Destinations) ==================
+// ================== Hero Slider ==================
+const HERO_SLIDES = [
+  "img/nuur.jpg",
+  "img/slide2.jpg",
+  "img/slide3.jpg",
+  "img/slide4.jpg",
+];
+let heroIndex = 0;
+
+function setHeroSlide(i) {
+  heroIndex = (i + HERO_SLIDES.length) % HERO_SLIDES.length;
+  document.documentElement.style.setProperty(
+    "--hero-img",
+    `url("${HERO_SLIDES[heroIndex]}")`,
+  );
+  $$(".hs-dot").forEach((d, idx) =>
+    d.classList.toggle("is-active", idx === heroIndex),
+  );
+}
+
+function setupHeroSlider() {
+  const dotsWrap = $("#hsDots");
+  const prevBtn = $("#hsPrev");
+  const nextBtn = $("#hsNext");
+
+  dotsWrap.innerHTML = HERO_SLIDES.map(
+    (_, idx) =>
+      `<button class="hs-dot ${idx === 0 ? "is-active" : ""}" data-idx="${idx}" aria-label="Slide ${idx + 1}" type="button"></button>`,
+  ).join("");
+
+  dotsWrap.addEventListener("click", (e) => {
+    const btn = e.target.closest(".hs-dot");
+    if (!btn) return;
+    setHeroSlide(Number(btn.dataset.idx));
+  });
+
+  prevBtn.addEventListener("click", () => setHeroSlide(heroIndex - 1));
+  nextBtn.addEventListener("click", () => setHeroSlide(heroIndex + 1));
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") setHeroSlide(heroIndex - 1);
+    if (e.key === "ArrowRight") setHeroSlide(heroIndex + 1);
+  });
+
+  setHeroSlide(0);
+}
+
+// ================== Destinations ==================
 const destinations = [
   {
     key: "gobi",
@@ -252,7 +303,6 @@ const destinations = [
       days: "5–8일",
     },
   },
-
   {
     key: "khuvsgul",
     img: "img/khuvsgul.jpg",
@@ -269,7 +319,6 @@ const destinations = [
       days: "4–7일",
     },
   },
-
   {
     key: "terelj",
     img: "img/terelj.jpg",
@@ -286,7 +335,6 @@ const destinations = [
       days: "1–3일",
     },
   },
-
   {
     key: "kharkhorin",
     img: "img/kharkhorin.jpg",
@@ -304,7 +352,8 @@ const destinations = [
     },
   },
 ];
-// ================== 21 Provinces (Aimags) ==================
+
+// ================== 21 Provinces ==================
 const provinces = [
   { en: "Arkhangai", ko: "아르항가이" },
   { en: "Bayan-Ulgii", ko: "바양-올기" },
@@ -328,28 +377,29 @@ const provinces = [
   { en: "Uvs", ko: "우브스" },
   { en: "Zavkhan", ko: "자브항" },
 ];
+
 const PROVINCE_IMAGES = {
-  "Arkhangai": "img/arkhangai.jpg",
+  Arkhangai: "img/arkhangai.jpg",
   "Bayan-Ulgii": "img/bayan-ulgii.jpg",
-  "Bayankhongor": "img/bayankhongor.jpg",
-  "Bulgan": "img/bulgan.jpg",
+  Bayankhongor: "img/bayankhongor.jpg",
+  Bulgan: "img/bulgan.jpg",
   "Darkhan-Uul": "img/darkhan.jpg",
-  "Dornod": "img/dornod.jpg",
-  "Dornogovi": "img/dornogovi.jpg",
-  "Dundgovi": "img/dundgovi.jpg",
+  Dornod: "img/dornod.jpg",
+  Dornogovi: "img/dornogovi.jpg",
+  Dundgovi: "img/dundgovi.jpg",
   "Govi-Altai": "img/govi-altai.jpg",
-  "Govisumber": "img/govisumber.jpg",
-  "Khentii": "img/khentii.jpg",
-  "Khovd": "img/khovd.jpg",
-  "Khuvsgul": "img/khuvsgul.jpg",
-  "Umnugovi": "img/umnugovi.jpg",
-  "Orkhon": "img/orkhon.jpg",
-  "Uvurkhangai": "img/uvurkhangai.jpg",
-  "Selenge": "img/selenge.jpg",
-  "Sukhbaatar": "img/sukhbaatar.jpg",
-  "Tuv": "img/tuv.jpg",
-  "Uvs": "img/uvs.jpg",
-  "Zavkhan": "img/zavkhan.jpg",
+  Govisumber: "img/govisumber.jpg",
+  Khentii: "img/khentii.jpg",
+  Khovd: "img/khovd.jpg",
+  Khuvsgul: "img/khuvsgul.jpg",
+  Umnugovi: "img/umnugovi.jpg",
+  Orkhon: "img/orkhon.jpg",
+  Uvurkhangai: "img/uvurkhangai.jpg",
+  Selenge: "img/selenge.jpg",
+  Sukhbaatar: "img/sukhbaatar.jpg",
+  Tuv: "img/tuv.jpg",
+  Uvs: "img/uvs.jpg",
+  Zavkhan: "img/zavkhan.jpg",
 };
 
 // ================== Packages / Reviews ==================
@@ -372,7 +422,6 @@ const packages = [
       badge: "베스트",
     },
   },
-
   {
     id: 2,
     type: "family",
@@ -391,7 +440,6 @@ const packages = [
       badge: "간편",
     },
   },
-
   {
     id: 3,
     type: "culture",
@@ -410,7 +458,6 @@ const packages = [
       badge: "문화",
     },
   },
-
   {
     id: 4,
     type: "nature",
@@ -429,7 +476,6 @@ const packages = [
       badge: "자연",
     },
   },
-
   {
     id: 5,
     type: "adventure",
@@ -448,7 +494,6 @@ const packages = [
       badge: "프리미엄",
     },
   },
-
   {
     id: 6,
     type: "adventure",
@@ -505,21 +550,7 @@ const reviews = [
   },
 ];
 
-// ================== Helpers ==================
-const $ = (sel, parent = document) => parent.querySelector(sel);
-const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
-
-function t(key) {
-  return (I18N[currentLang] && I18N[currentLang][key]) || I18N.en[key] || key;
-}
-function stars(n) {
-  return "★".repeat(n) + "☆".repeat(Math.max(0, 5 - n));
-}
-function money(n) {
-  return `$${n}`;
-} // demo currency
-
-// ================== i18n apply + photo vars ==================
+// ================== render ==================
 function applyI18n() {
   document.documentElement.lang = currentLang === "ko" ? "ko" : "en";
 
@@ -528,7 +559,6 @@ function applyI18n() {
     el.textContent = t(key);
   });
 
-  // placeholders
   $("#qDestination").placeholder =
     currentLang === "ko"
       ? "고비, 홉스골, 알타이..."
@@ -541,11 +571,6 @@ function applyI18n() {
   $("#provSearch").placeholder =
     currentLang === "ko" ? "주(아이막) 검색..." : "Search province...";
 
-  // set page background photos
-  document.documentElement.style.setProperty(
-    "--hero-img",
-    `url("${PHOTOS.hero}")`,
-  );
   document.documentElement.style.setProperty(
     "--dest-img",
     `url("${PHOTOS.dest}")`,
@@ -561,29 +586,27 @@ function applyI18n() {
   renderReview();
 }
 
-// ================== Render Destinations ==================
 function renderDestinations() {
   const grid = $("#destGrid");
   grid.innerHTML = destinations
     .map((d) => {
       const x = d[currentLang];
       return `
-      <article class="card">
-        <div class="card-media" style="background-image:url('${d.img}')">
-          <span class="card-badge">${x.tag}</span>
-        </div>
-        <h3>${x.name}</h3>
-        <div class="meta">
-          <span>${x.highlight}</span>
-          <span>${x.days}</span>
-        </div>
-      </article>
-    `;
+          <article class="card">
+            <div class="card-media" style="background-image:url('${d.img}')">
+              <span class="card-badge">${x.tag}</span>
+            </div>
+            <h3>${x.name}</h3>
+            <div class="meta">
+              <span>${x.highlight}</span>
+              <span>${x.days}</span>
+            </div>
+          </article>
+        `;
     })
     .join("");
 }
 
-// ================== Render 21 Provinces ==================
 function renderProvinces() {
   const q = ($("#provSearch").value || "").trim().toLowerCase();
 
@@ -596,28 +619,26 @@ function renderProvinces() {
   const grid = $("#provGrid");
   grid.innerHTML = list
     .map((p) => {
-      const img = PROVINCE_IMAGES[p.en] || "/img/default.jpg"; // fallback зураг
+      const img = PROVINCE_IMAGES[p.en] || "img/default.jpg";
       const badge = currentLang === "ko" ? "아이막" : "Aimag";
       const title = currentLang === "ko" ? p.ko : p.en;
 
       return `
-      <article class="card">
-        <div class="card-media" style="background-image:url('${img}')">
-          <span class="card-badge">${badge}</span>
-        </div>
-        <h3>${title}</h3>
-        <div class="meta">
-          <span class="muted">${p.en}</span>
-          <span class="muted">—</span>
-        </div>
-      </article>
-    `;
+          <article class="card">
+            <div class="card-media" style="background-image:url('${img}')">
+              <span class="card-badge">${badge}</span>
+            </div>
+            <h3>${title}</h3>
+            <div class="meta">
+              <span class="muted">${p.en}</span>
+              <span class="muted">—</span>
+            </div>
+          </article>
+        `;
     })
     .join("");
 }
 
-
-// ================== Render Packages ==================
 let currentFilter = "all";
 function renderPackages() {
   const grid = $("#pkgGrid");
@@ -630,21 +651,21 @@ function renderPackages() {
     .map((p) => {
       const x = p[currentLang];
       return `
-      <article class="card" data-type="${p.type}">
-        <div class="card-media" style="background-image:url('${PHOTOS.prov}')">
-          <span class="card-badge">${x.badge}</span>
-        </div>
-        <h3>${x.title}</h3>
-        <div class="meta">
-          <span>${x.place}</span>
-          <span>${x.duration} • ${p.level.toUpperCase()}</span>
-        </div>
-        <div class="price">
-          <strong>${money(p.price)}</strong>
-          <a class="btn btn-small" href="#contact" data-pkg="${x.title}">${t("ui.book")}</a>
-        </div>
-      </article>
-    `;
+          <article class="card" data-type="${p.type}">
+            <div class="card-media" style="background-image:url('${PHOTOS.prov}')">
+              <span class="card-badge">${x.badge}</span>
+            </div>
+            <h3>${x.title}</h3>
+            <div class="meta">
+              <span>${x.place}</span>
+              <span>${x.duration} • ${p.level.toUpperCase()}</span>
+            </div>
+            <div class="price">
+              <strong>${money(p.price)}</strong>
+              <a class="btn btn-small" href="#contact" data-pkg="${x.title}">${t("ui.book")}</a>
+            </div>
+          </article>
+        `;
     })
     .join("");
 
@@ -658,7 +679,6 @@ function renderPackages() {
   });
 }
 
-// ================== Filters ==================
 function setupFilters() {
   $$(".chip").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -670,22 +690,22 @@ function setupFilters() {
   });
 }
 
-// ================== Reviews ==================
 let reviewIndex = 0;
 function renderReview() {
   const r = reviews[reviewIndex];
   const x = r[currentLang];
   $("#reviewBox").innerHTML = `
-    <div class="review-top">
-      <div>
-        <div class="review-name">${x.name}</div>
-        <div class="muted small">${t("ui.verified")}</div>
-      </div>
-      <div class="stars" aria-label="${r.stars} out of 5">${stars(r.stars)}</div>
-    </div>
-    <p>${x.text}</p>
-  `;
+        <div class="review-top">
+          <div>
+            <div class="review-name">${x.name}</div>
+            <div class="muted small">${t("ui.verified")}</div>
+          </div>
+          <div class="stars" aria-label="${r.stars} out of 5">${stars(r.stars)}</div>
+        </div>
+        <p>${x.text}</p>
+      `;
 }
+
 function setupReviewSlider() {
   $("#prevReview").addEventListener("click", () => {
     reviewIndex = (reviewIndex - 1 + reviews.length) % reviews.length;
@@ -697,7 +717,6 @@ function setupReviewSlider() {
   });
 }
 
-// ================== FAQ Accordion ==================
 function setupAccordion() {
   $$("#faqAcc .acc-q").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -721,7 +740,6 @@ function setupAccordion() {
   });
 }
 
-// ================== Mobile Menu ==================
 function setupMobileMenu() {
   const toggle = $("#navToggle");
   const list = $("#navList");
@@ -739,7 +757,6 @@ function setupMobileMenu() {
   });
 }
 
-// ================== Search ==================
 function setupSearch() {
   $("#searchForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -768,28 +785,27 @@ function setupSearch() {
     }
 
     box.innerHTML = `
-      <div class="muted small">${t("ui.topMatches")}${date ? ` (${date})` : ""}:</div>
-      ${matches
-        .map(
-          (m) => `
-        <div class="card" style="padding:.8rem;">
-          <div style="display:flex; justify-content:space-between; gap:.7rem; flex-wrap:wrap;">
-            <strong>${m[currentLang].title}</strong>
-            <span class="muted small">${m[currentLang].place} • ${m[currentLang].duration}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:.7rem; margin-top:.5rem;">
-            <span class="muted small">${t("ui.from")} <strong>${money(m.price)}</strong></span>
-            <a class="btn btn-small" href="#contact" data-pkg="${m[currentLang].title}">${t("ui.book")}</a>
-          </div>
-        </div>
-      `,
-        )
-        .join("")}
-    `;
+          <div class="muted small">${t("ui.topMatches")}${date ? ` (${date})` : ""}:</div>
+          ${matches
+            .map(
+              (m) => `
+            <div class="card" style="padding:.8rem;">
+              <div style="display:flex; justify-content:space-between; gap:.7rem; flex-wrap:wrap;">
+                <strong>${m[currentLang].title}</strong>
+                <span class="muted small">${m[currentLang].place} • ${m[currentLang].duration}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:.7rem; margin-top:.5rem;">
+                <span class="muted small">${t("ui.from")} <strong>${money(m.price)}</strong></span>
+                <a class="btn btn-small" href="#contact" data-pkg="${m[currentLang].title}">${t("ui.book")}</a>
+              </div>
+            </div>
+          `,
+            )
+            .join("")}
+        `;
   });
 }
 
-// ================== Contact ==================
 function setupContact() {
   $("#contactForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -809,12 +825,10 @@ function setupContact() {
   });
 }
 
-// ================== Provinces search ==================
 function setupProvinceSearch() {
   $("#provSearch").addEventListener("input", renderProvinces);
 }
 
-// ================== Back to top ==================
 function setupToTop() {
   const btn = $("#toTop");
   window.addEventListener("scroll", () => {
@@ -825,7 +839,6 @@ function setupToTop() {
   );
 }
 
-// ================== Language Toggle ==================
 function setupLang() {
   const buttons = $$(".lang-btn");
   buttons.forEach((b) => {
@@ -842,10 +855,36 @@ function setupLang() {
   );
 }
 
+// Floating quick search open/close
+function setupQuickSearchFloating() {
+  const openBtn = $("#openSearch");
+  const closeBtn = $("#closeSearch");
+  const box = $("#mobileSearchBox");
+  const dim = $("#mobileDim");
+
+  const open = () => {
+    box.classList.add("is-open");
+    dim.classList.remove("is-hidden");
+  };
+  const close = () => {
+    box.classList.remove("is-open");
+    dim.classList.add("is-hidden");
+  };
+
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  dim.addEventListener("click", close);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
 // ================== Init ==================
 document.addEventListener("DOMContentLoaded", () => {
   $("#year").textContent = new Date().getFullYear();
 
+  setupHeroSlider();
   setupMobileMenu();
   setupFilters();
   setupReviewSlider();
@@ -855,6 +894,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupProvinceSearch();
   setupToTop();
   setupLang();
+  setupQuickSearchFloating();
 
   applyI18n();
 });
