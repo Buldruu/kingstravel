@@ -906,10 +906,10 @@ const provinces = [
 ];
 
 const PROVINCE_IMAGES = {
-  Arkhangai: "img/arkhangai.jpg",
+  Arkhangai: "img/Arkhangai.jpg",
   "Bayan-Ulgii": "img/bayan-ulgii.jpg",
   Bayankhongor: "img/bayankhongor.jpg",
-  Bulgan: "img/bulgan.jpg",
+  Bulgan: "img/Bulgan.jpg",
   "Darkhan-Uul": "img/darkhan.jpg",
   Dornod: "img/dornod.jpg",
   Dornogovi: "img/dornogovi.jpg",
